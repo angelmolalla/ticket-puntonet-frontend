@@ -8,23 +8,81 @@
               <div class="col-md-12">
                 <div class="card border-info">
                   <div class="card-body">
-                    <form>
-                      <fieldset>
-                        <legend>Ticket</legend>
+                    <fieldset>
+                      <form>
+                        <legend>{{title}}</legend>
+                        <br />
                         <div class="row">
                           <div class="col-md-6">
                             <mat-form-field class="example-full-width">
-                              <input type="text" matInput placeholder="Nombre" name="nombre" required>
+                              <input type="text" matInput placeholder="Nombre" name="name" [(ngModel)]="ticket.name"
+                                required>
                             </mat-form-field>
                           </div>
                           <div class="col-md-6">
                             <mat-form-field class="example-full-width">
-                              <input type="text" matInput placeholder="Nombre" name="age" required>
+                              <input type="text" matInput placeholder="Descpripción" name="description"
+                                [(ngModel)]="ticket.description">
                             </mat-form-field>
                           </div>
                         </div>
-                      </fieldset>
-                    </form>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <mat-form-field class="example-full-width">
+                              <mat-select [formControl]="priorityForm" placeholder="Prioridad" required>
+                                <mat-option *ngFor="let priority of priorityStatus" [value]="priority.value">
+                                  {{priority.viewValue}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-sm-6">
+                            <mat-form-field class="example-full-width">
+                              <mat-select [formControl]="statusForm" placeholder="Estados" required>
+                                <mat-option *ngFor="let state of status" [value]="state.value">
+                                  {{state.viewValue}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <input type="text" matInput placeholder="Usuario" name="user" [(ngModel)]="ticket.user"
+                                required>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <mat-label>Fecha de vencimiento</mat-label>
+                              <input matInput [matDatepicker]="picker" [(ngModel)]="ticket.dueDate" name="dueDate"
+                                required readonly>
+                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                              <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <mat-form-field class="example-full-width">
+                              <mat-select [formControl]="dealForm" placeholder="Categoria" required>
+                                <mat-option *ngFor="let deal of dealStatus" [value]="deal.value">
+                                  {{deal.viewValue}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="clearfix">
+                          <button mat-raised-button color="primary" type="submit" (click)='create()'
+                            *ngIf="!id else elseBlock">Crear </button>
+                          <ng-template #elseBlock>
+                            <button mat-raised-button color="primary" type="submit" (click)='update()'>Editar</button>
+                          </ng-template>
+                        </div>
+                      </form>
+                    </fieldset>
                   </div>
                 </div>
               </div>
