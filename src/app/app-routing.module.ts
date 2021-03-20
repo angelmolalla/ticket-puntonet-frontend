@@ -1,29 +1,16 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { BrowserModule } from "@angular/platform-browser";
-import { Routes, RouterModule } from "@angular/router";
-
-import { IndexComponent } from "./pages/index/index.component";
-import { ProfilepageComponent } from "./pages/examples/profilepage/profilepage.component";
-import { RegisterpageComponent } from "./pages/examples/registerpage/registerpage.component";
-import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.component";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { TicketFormComponent } from './components/ticket-form/ticket-form.component';
+import { TicketComponent } from './components/ticket/ticket.component';
 
 const routes: Routes = [
-  { path: "", redirectTo: "home", pathMatch: "full" },
-  { path: "home", component: IndexComponent },
-  { path: "profile", component: ProfilepageComponent },
-  { path: "register", component: RegisterpageComponent },
-  { path: "landing", component: LandingpageComponent }
+  { path: '', component: TicketComponent },
+  { path: 'ticket', component: TicketFormComponent },
+  { path: 'ticket/:id', component: TicketFormComponent }
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    BrowserModule,
-    RouterModule.forRoot(routes, {
-      useHash: true
-    })
-  ],
-  exports: []
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
